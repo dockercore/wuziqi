@@ -8,7 +8,7 @@
   <a href="https://dockercore.github.io/wuziqi/" target="_blank">
     <img src="https://img.shields.io/badge/在线体验-GitHub Pages-blue?logo=github" alt="GitHub Pages">
   </a>
-  <a href="https://wuziqi.pages.dev" target="_blank">
+  <a href="https://wuziqi-b2y.pages.dev" target="_blank">
     <img src="https://img.shields.io/badge/在线体验-Cloudflare Pages-orange?logo=cloudflare" alt="Cloudflare Pages">
   </a>
   <img src="https://img.shields.io/badge/license-MIT-green" alt="MIT License">
@@ -22,7 +22,7 @@
 | 平台 | 链接 | 说明 |
 |------|------|------|
 | GitHub Pages | [dockercore.github.io/wuziqi](https://dockercore.github.io/wuziqi/) | GitHub 托管 |
-| Cloudflare Pages | [wuziqi.pages.dev](https://wuziqi.pages.dev) | 国内访问友好 |
+| Cloudflare Pages | [wuziqi-b2y.pages.dev](https://wuziqi-b2y.pages.dev) | 国内访问友好 |
 
 ## 游戏功能
 
