@@ -1,5 +1,5 @@
 // ========== 配置 ==========
-const WS_URL = 'wss://wuziqi-api.tmuxp.dev';
+const WS_URL = 'wss://wuziqi-api.tmuxp.com';
 const SIZE = 15;
 const CELL = 40;
 const PADDING = 20;
@@ -65,12 +65,34 @@ function cancelRoom() {
 
 function copyLink() {
     const input = document.getElementById('share-link');
-    input.select();
-    navigator.clipboard.writeText(input.value).then(() => {
+    const text = input.value;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+            const btn = document.querySelector('.btn-copy');
+            btn.textContent = '已复制!';
+            setTimeout(() => btn.textContent = '复制链接', 1500);
+        }).catch(() => {
+            fallbackCopy(text);
+        });
+    } else {
+        fallbackCopy(text);
+    }
+}
+
+function fallbackCopy(text) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+        document.execCommand('copy');
         const btn = document.querySelector('.btn-copy');
         btn.textContent = '已复制!';
         setTimeout(() => btn.textContent = '复制链接', 1500);
-    });
+    } catch {}
+    document.body.removeChild(ta);
 }
 
 function backToLobby() {
