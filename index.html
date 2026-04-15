@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五子棋</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>五子棋</h1>
+        <div class="info-panel">
+            <div class="player-info">
+                <span class="stone black-stone"></span>
+                <span id="status">黑棋先行</span>
+            </div>
+            <div class="score-board">
+                <span>黑: <strong id="black-score">0</strong></span>
+                <span>白: <strong id="white-score">0</strong></span>
+            </div>
+        </div>
+        <canvas id="board" width="600" height="600"></canvas>
+        <div class="controls">
+            <button id="btn-restart" onclick="restartGame()">重新开始</button>
+            <button id="btn-undo" onclick="undoMove()">悔棋</button>
+            <button id="btn-ai" onclick="toggleAI()">人机对战: 关</button>
+        </div>
+        <div id="win-overlay" class="overlay hidden">
+            <div class="overlay-content">
+                <h2 id="win-message"></h2>
+                <button onclick="restartGame()">再来一局</button>
+            </div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
