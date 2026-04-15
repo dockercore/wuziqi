@@ -1,45 +1,43 @@
-# 五子棋
+# 五子棋游戏 - Cloudflare Pages 部署
 
-一个经典的网页版五子棋游戏，使用 Canvas 绘制，纯前端实现。
+这是一个在线五子棋游戏，支持人机对战和双人对战模式。
+
+## 在线访问
+
+- GitHub Pages: https://dockercore.github.io/wuziqi/
+- Cloudflare Pages: 部署后自动生成
+
+## 部署到 Cloudflare Pages
+
+### 方法一：通过 Cloudflare Dashboard（推荐）
+
+1. 登录 [Cloudflare Dashboard](https://dash.cloudflare.com/)
+2. 进入 **Workers & Pages** -> **Create application** -> **Pages**
+3. 选择 **Connect to Git**
+4. 授权并选择 `dockercore/wuziqi` 仓库
+5. 构建设置：
+   - Framework preset: `None`
+   - Build command: 留空
+   - Build output directory: `/`（或 `.`）
+6. 点击 **Save and Deploy**
+
+### 方法二：通过 Wrangler CLI
+
+```bash
+npm install -g wrangler
+wrangler login
+wrangler pages deploy . --project-name=wuziqi
+```
 
 ## 功能
 
-- 双人对战模式
-- 人机对战模式（内置简单 AI）
+- 黑白棋双人对战
+- 人机对战（AI）模式
 - 悔棋功能
 - 计分板
-- 木纹棋盘风格界面
-
-## 如何开始
-
-直接在浏览器中打开 `index.html` 即可开始游戏。
-
-```
-open index.html
-```
-
-或者用任意本地服务器：
-
-```
-python3 -m http.server 8080
-```
-
-然后访问 http://localhost:8080
-
-## 操作说明
-
-- 点击棋盘交叉点落子
-- 黑棋先行
-- 先连成五子（横/竖/斜）者获胜
-- 点击「人机对战」按钮切换模式
-- 点击「悔棋」撤销上一步
 
 ## 技术栈
 
 - HTML5 Canvas
 - 原生 JavaScript
 - CSS3
-
-## 许可证
-
-MIT
