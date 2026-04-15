@@ -141,11 +141,16 @@ function handleServerMsg(msg) {
             break;
         case 'start':
             showPage('game');
-            const colorText = myColor === 1 ? '你是黑棋' : '你是白棋';
-            const colorEl = document.getElementById('my-color');
-            colorEl.textContent = colorText;
-            colorEl.className = 'my-color ' + (myColor === 1 ? 'black' : 'white');
+            const colorText2 = myColor === 1 ? '你是黑棋' : '你是白棋';
+            const colorEl2 = document.getElementById('my-color');
+            colorEl2.textContent = colorText2;
+            colorEl2.className = 'my-color ' + (myColor === 1 ? 'black' : 'white');
+            currentPlayer = msg.currentPlayer || BLACK;
+            console.log('[start] myColor=' + myColor + ' currentPlayer=' + currentPlayer);
             initGame();
+            // initGame 会重置 currentPlayer 为 BLACK，需要恢复为服务端值
+            currentPlayer = msg.currentPlayer || BLACK;
+            updateStatus();
             break;
         case 'sync':
             board = msg.board;
@@ -283,9 +288,11 @@ canvas.addEventListener('click', (e) => {
     if (gameOver) return;
 
     // 在线模式：只能下自己的棋
-    if (mode === 'online' && currentPlayer !== myColor) return;
-    // 在线模式：不允许 AI
-    if (mode === 'online') return handleOnlineMove(e);
+    if (mode === 'online') {
+        console.log('[click] currentPlayer=' + currentPlayer + ' myColor=' + myColor + ' canMove=' + (currentPlayer === myColor));
+        if (currentPlayer !== myColor) return;
+        return handleOnlineMove(e);
+    }
 
     // 本地模式
     if (aiEnabled && currentPlayer === WHITE) return;

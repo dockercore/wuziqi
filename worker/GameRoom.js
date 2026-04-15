@@ -55,7 +55,7 @@ export class GameRoom {
 
     // 如果两人都到了，开始游戏
     if (this.players.length === 2) {
-      this.broadcast({ type: 'start' });
+      this.broadcast({ type: 'start', currentPlayer: this.currentPlayer });
     }
 
     // 旁观者也能看到棋盘
