@@ -31,6 +31,15 @@
                 <button onclick="restartGame()">再来一局</button>
             </div>
         </div>
+        <div id="undo-overlay" class="overlay hidden">
+            <div class="overlay-content">
+                <h2 id="undo-message">对方请求悔棋</h2>
+                <div class="undo-buttons">
+                    <button id="btn-undo-accept" class="btn-accept" onclick="acceptUndo()">同意</button>
+                    <button id="btn-undo-reject" class="btn-reject" onclick="rejectUndo()">拒绝</button>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="game.js"></script>
 </body>

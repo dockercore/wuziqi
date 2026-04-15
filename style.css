@@ -152,3 +152,35 @@ h1 {
 }
 
 .overlay-content button:hover { background: #c73650; }
+
+.undo-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
+
+.btn-accept {
+    padding: 12px 36px;
+    font-size: 1.1rem;
+    background: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.btn-accept:hover { background: #3d9140; }
+
+.btn-reject {
+    padding: 12px 36px;
+    font-size: 1.1rem;
+    background: #e94560;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.btn-reject:hover { background: #c73650; }

@@ -327,8 +327,29 @@ function restartGame() {
 function undoMove() {
     if (history.length === 0 || gameOver) return;
 
-    // 人机模式悔两步
-    const steps = aiEnabled && history.length >= 2 ? 2 : 1;
+    // 人机模式：AI 自动同意，直接悔棋
+    if (aiEnabled) {
+        doUndo(2);
+        return;
+    }
+
+    // 双人模式：弹出确认，请求对方同意
+    const requester = history[history.length - 1].player;
+    const requesterName = requester === BLACK ? '黑棋' : '白棋';
+    document.getElementById('undo-message').textContent = `${requesterName} 请求悔棋`;
+    document.getElementById('undo-overlay').classList.remove('hidden');
+}
+
+function acceptUndo() {
+    document.getElementById('undo-overlay').classList.add('hidden');
+    doUndo(1);
+}
+
+function rejectUndo() {
+    document.getElementById('undo-overlay').classList.add('hidden');
+}
+
+function doUndo(steps) {
     for (let i = 0; i < steps && history.length > 0; i++) {
         const move = history.pop();
         board[move.r][move.c] = EMPTY;
