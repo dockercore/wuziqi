@@ -28,9 +28,144 @@ h1 {
     text-shadow: 0 2px 10px rgba(240, 217, 181, 0.3);
 }
 
+/* ===== 大厅 ===== */
+.lobby-box {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(240,217,181,0.2);
+    border-radius: 16px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    min-width: 340px;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 14px 0;
+    font-size: 1.15rem;
+    background: #e94560;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s;
+}
+.btn-primary:hover { background: #c73650; }
+
+.divider {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    color: #888;
+    font-size: 0.9rem;
+}
+.divider::before, .divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 38%;
+    height: 1px;
+    background: rgba(255,255,255,0.15);
+}
+.divider::before { left: 0; }
+.divider::after { right: 0; }
+
+.join-row {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+}
+.join-row input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid rgba(240,217,181,0.3);
+    border-radius: 8px;
+    background: rgba(0,0,0,0.3);
+    color: #eee;
+    font-size: 1rem;
+    font-family: inherit;
+    outline: none;
+}
+.join-row input::placeholder { color: #666; }
+.join-row input:focus { border-color: #f0d9b5; }
+
+.btn-secondary {
+    padding: 12px 20px;
+    font-size: 1rem;
+    background: #0f3460;
+    color: #f0d9b5;
+    border: 1px solid #f0d9b5;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s;
+    white-space: nowrap;
+}
+.btn-secondary:hover { background: #1a4a8a; }
+
+.btn-local {
+    padding: 10px 24px;
+    font-size: 0.95rem;
+    background: transparent;
+    color: #aaa;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+}
+.btn-local:hover { color: #eee; border-color: rgba(255,255,255,0.3); }
+
+/* ===== 等待界面 ===== */
+.waiting-text {
+    font-size: 1.2rem;
+    color: #f0d9b5;
+}
+.room-id-label {
+    font-size: 1rem;
+    color: #aaa;
+}
+.room-id-label strong {
+    font-size: 1.8rem;
+    color: #f0d9b5;
+    letter-spacing: 6px;
+}
+.share-box {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+}
+.share-box input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid rgba(240,217,181,0.3);
+    border-radius: 8px;
+    background: rgba(0,0,0,0.3);
+    color: #eee;
+    font-size: 0.9rem;
+    font-family: inherit;
+    outline: none;
+}
+.btn-copy {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    background: #0f3460;
+    color: #f0d9b5;
+    border: 1px solid #f0d9b5;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    white-space: nowrap;
+}
+
+/* ===== 游戏 ===== */
 .info-panel {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
     max-width: 600px;
     padding: 0 10px;
@@ -65,10 +200,16 @@ h1 {
     gap: 20px;
     font-size: 1rem;
 }
+.score-board strong { color: #f0d9b5; }
 
-.score-board strong {
-    color: #f0d9b5;
+.my-color {
+    font-size: 0.85rem;
+    padding: 4px 12px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.1);
 }
+.my-color.black { color: #f0d9b5; }
+.my-color.white { color: #ccc; border: 1px solid rgba(255,255,255,0.2); }
 
 #board {
     border-radius: 8px;
@@ -91,28 +232,20 @@ h1 {
     font-family: inherit;
 }
 
-#btn-restart {
-    background: #e94560;
-    color: #fff;
-}
-
+#btn-restart { background: #e94560; color: #fff; }
 #btn-restart:hover { background: #c73650; }
 
-#btn-undo {
-    background: #f0d9b5;
-    color: #333;
-}
-
+#btn-undo { background: #f0d9b5; color: #333; }
 #btn-undo:hover { background: #d4c09a; }
 
-#btn-ai {
+.btn-lobby {
     background: #0f3460;
     color: #f0d9b5;
-    border: 1px solid #f0d9b5;
+    border: 1px solid #f0d9b5 !important;
 }
+.btn-lobby:hover { background: #1a4a8a; }
 
-#btn-ai:hover { background: #1a4a8a; }
-
+/* ===== 弹窗 ===== */
 .overlay {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -122,7 +255,6 @@ h1 {
     align-items: center;
     z-index: 100;
 }
-
 .overlay.hidden { display: none; }
 
 .overlay-content {
@@ -133,13 +265,11 @@ h1 {
     box-shadow: 0 16px 48px rgba(0,0,0,0.6);
     border: 2px solid #f0d9b5;
 }
-
 .overlay-content h2 {
     font-size: 2rem;
     margin-bottom: 24px;
     color: #f0d9b5;
 }
-
 .overlay-content button {
     padding: 12px 36px;
     font-size: 1.1rem;
@@ -150,7 +280,6 @@ h1 {
     cursor: pointer;
     font-family: inherit;
 }
-
 .overlay-content button:hover { background: #c73650; }
 
 .undo-buttons {
@@ -158,29 +287,27 @@ h1 {
     gap: 16px;
     justify-content: center;
 }
-
 .btn-accept {
-    padding: 12px 36px;
+    padding: 12px 36px !important;
     font-size: 1.1rem;
-    background: #4caf50;
+    background: #4caf50 !important;
     color: #fff;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     font-family: inherit;
 }
-
-.btn-accept:hover { background: #3d9140; }
-
+.btn-accept:hover { background: #3d9140 !important; }
 .btn-reject {
-    padding: 12px 36px;
+    padding: 12px 36px !important;
     font-size: 1.1rem;
-    background: #e94560;
+    background: #e94560 !important;
     color: #fff;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     font-family: inherit;
 }
+.btn-reject:hover { background: #c73650 !important; }
 
-.btn-reject:hover { background: #c73650; }
+.hidden { display: none !important; }
