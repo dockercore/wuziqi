@@ -15,6 +15,12 @@ export class GameRoom {
 
   async fetch(request) {
     const url = new URL(request.url);
+
+    // 非 WebSocket 请求（健康检查等）
+    if (request.headers.get('Upgrade') !== 'websocket') {
+      return new Response('Expected WebSocket', { status: 400 });
+    }
+
     const pair = new WebSocketPair();
     const [client, server] = Object.values(pair);
 
@@ -39,13 +45,17 @@ export class GameRoom {
       this.handleDisconnect(server);
     });
 
+    // 先初始化棋盘（如果还没初始化）
+    if (!this.board) {
+      this.resetBoard();
+    }
+
     // 发送初始状态
     this.send(server, { type: 'init', color, roomId: url.pathname.split('/room/')[1] });
 
     // 如果两人都到了，开始游戏
     if (this.players.length === 2) {
       this.broadcast({ type: 'start' });
-      this.resetBoard();
     }
 
     // 旁观者也能看到棋盘
@@ -98,6 +108,7 @@ export class GameRoom {
   handleMove(player, msg) {
     if (this.gameOver) return;
     if (player.color !== this.currentPlayer) return;
+    if (!this.board) return;
     const { r, c } = msg;
     if (r < 0 || r >= 15 || c < 0 || c >= 15) return;
     if (this.board[r][c] !== 0) return;
@@ -151,8 +162,6 @@ export class GameRoom {
 
   handleUndoReject(player) {
     this.undoRequester = null;
-    const requester = this.players.find(p => p.color === this.undoRequester);
-    // 通知请求者被拒绝
     this.broadcast({ type: 'undo-rejected' });
   }
 

@@ -134,6 +134,7 @@ function connectWS(roomId) {
 }
 
 function handleServerMsg(msg) {
+    console.log('[server msg]', msg.type, msg);
     switch (msg.type) {
         case 'init':
             myColor = msg.color;
@@ -304,9 +305,14 @@ function getGridPos(e) {
 
 function handleOnlineMove(e) {
     const { r, c } = getGridPos(e);
+    console.log('[online move]', { r, c, myColor, currentPlayer, wsReady: ws ? ws.readyState : 'null' });
     if (r < 0 || r >= SIZE || c < 0 || c >= SIZE) return;
     if (board[r][c] !== EMPTY) return;
-    ws.send(JSON.stringify({ type: 'move', r, c }));
+    if (ws && ws.readyState === WebSocket.OPEN) {
+        ws.send(JSON.stringify({ type: 'move', r, c }));
+    } else {
+        console.error('[online move] ws not open');
+    }
 }
 
 function handleLocalMove(e) {
